@@ -1,17 +1,23 @@
 export default async function handler(req, res) {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  const forwardedIp = req.headers['x-forwarded-for'] || 'Не указан';
+  const userAgent = req.headers['user-agent'] || 'Неизвестен';
 
-  // Данные для отправки
   const data = {
-    content: "🚀 **Новый посетитель на сайте!**",
+    content: "**Log**",
     embeds: [{
-      title: "Информация о сессии",
-      color: 5814783, // Синий цвет
+      title: "Детали запроса",
+      color: 5814783,
       fields: [
         {
           name: "User-Agent",
-          value: req.headers['user-agent'] || 'Неизвестен',
+          value: userAgent,
           inline: false
+        },
+        {
+          name: "Переданный IP",
+          value: forwardedIp,
+          inline: true
         },
         {
           name: "Дата",
