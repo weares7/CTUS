@@ -1,5 +1,4 @@
 <script>
-  // Вызываем наш API роут при загрузке страницы
   fetch('/api/log')
     .then(response => console.log('Log sent'))
     .catch(error => console.error('Error:', error));
